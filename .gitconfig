@@ -1,0 +1,7 @@
+[user]
+	name = "Dickie Field"
+	email = "me@rpf3.io"
+[core]
+	editor = code -w
+[commit]
+	template = ~/.gitmessage

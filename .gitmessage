@@ -1,0 +1,36 @@
+# Finish this sentence: "If applied, this commit will...".
+# <type>: <subject>
+# |<---               Max 50                 --->|
+
+
+# Why is this change being made?
+# |<---                           Max 72                           --->|
+
+# Provide any relevant references.
+
+# --- END ---
+# Commit Types:
+#   feat (a new feature)
+#   fix (a bug fix)
+#   docs (documentation only changes)
+#   style (changes that do not affect the meaning of the code)
+#   refactor (a code change that neither fixes a bug nor adds a feature)
+#   perf (a code change that improves performance)
+#   test (adding missing tests or correcting existing tests)
+#   build (changes that affect the build system or external dependencies)
+#   ci (changes to our CI configuration files and scripts)
+#   chore (other changes that don't modify src or test files)
+#   revert (reverts a previous commit)
+# -----------
+# The Seven Rules
+#   1. Separate subject from body with a blank line
+#   2. Limit the subject line to 50 characters
+#   3. Capitalize the subject line
+#   4. Do not end the subject line with a period
+#   5. Use the imperative mood in the subject line
+#   6. Wrap the body at 72 characters
+#   7. Use the body to explain what and why vs. how
+# -----------
+# References
+#   https://github.com/commitizen/conventional-commit-types/blob/master/index.json
+#   https://chris.beams.io/posts/git-commit/#seven-rules
