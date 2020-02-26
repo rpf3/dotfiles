@@ -38,3 +38,7 @@ alias ga="git add ."
 alias gc="git commit"
 alias gs="git status"
 alias pl="git pull"
+
+# kubernetes
+alias k="kubectl"
+alias kc="kubectl config set-context --current --namespace"
