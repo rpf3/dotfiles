@@ -8,6 +8,7 @@ function doIt() {
   rsync --exclude ".git/" \
     --exclude "bootstrap" \
     --exclude "README.md" \
+    --exclude "LICENSE" \
     -avh --no-perms . ~;
 
   # shellcheck source=/dev/null
