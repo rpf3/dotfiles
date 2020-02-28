@@ -1,0 +1,104 @@
+#!/usr/bin/env bash
+
+set -e
+
+sudo apt update
+
+# common packages
+sudo apt install -y \
+  bash-completion \
+  curl \
+  dnsutils \
+  jq \
+  rsync \
+  unzip \
+  wget
+
+# install git
+if [[ -z $(command -v git) ]]; then
+  sudo apt install -y git
+
+  # required for 'git stash' but missing on Debian
+  sudo apt install -y gettext
+
+  # required for 'gitk' but missing on Debian
+  sudo apt install -y wish
+else
+  echo "Skipping git; found installation at $(command -v git)"
+fi
+
+# install python3 and related tools
+if [[ -z $(command -v python3) ]]; then
+  sudo apt install -y \
+    python3 \
+    python3-pip \
+    python3-venv \
+    pipenv
+else
+  echo "Skipping python3; found installation at $(command -v python3)"
+fi
+
+# install pipx
+if [[ -z $(command -v pipx) ]]; then
+  python3 -m pip install --user pipx
+  python3 -m pipx ensurepath
+
+  # `pipx ensurepath` updates .bashrc; source it again so the following `pipx` commands work
+  # shellcheck source=/dev/null
+  source ~/.bashrc
+else
+  echo "Skipping pipx; found installation at $(command -v pipx)"
+fi
+
+# install docker
+# ref: https://docs.docker.com/install/linux/docker-ce/debian/
+if [[ -z $(command -v docker) ]]; then
+  sudo apt install -y \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg2 \
+    software-properties-common
+
+  curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+  sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
+  sudo apt update
+
+  sudo apt install -y \
+    docker-ce \
+    docker-ce-cli \
+    containerd.io
+else
+  echo "Skipping docker; found installation at $(command -v docker)"
+fi
+
+# install shellcheck
+if [[ -z $(command -v shellcheck) ]]; then
+  sudo apt install -y shellcheck
+else
+  echo "Skipping shellcheck; found installation at $(command -v shellcheck)"
+fi
+
+# install kubectl
+if [[ -z $(command -v kubectl) ]]; then
+  curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+  chmod +x ./kubectl
+  sudo mv ./kubectl /usr/local/bin/kubectl
+else
+  echo "Skipping kubectl; found installation at $(command -v kubectl)"
+fi
+
+# install helm
+if [[ -z $(command -v helm) ]]; then
+  wget https://get.helm.sh/helm-v3.1.1-linux-amd64.tar.gz --directory-prefix=/tmp
+  tar -xvf /tmp/helm-v3.1.1-linux-amd64.tar.gz --directory /tmp
+  sudo mv /tmp/linux-amd64/helm /usr/local/bin/helm
+
+  # add the helm stable repo
+  helm repo add stable https://kubernetes-charts.storage.googleapis.com/
+else
+  echo "Skipping helm; found installation at $(command -v helm)"
+fi
+
+# cleanup
+sudo apt autoremove -y
