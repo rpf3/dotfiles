@@ -38,6 +38,7 @@ alias ga="git add ."
 alias gc="git commit"
 alias gs="git status"
 alias pl="git pull"
+alias gitk="DISPLAY=:0 gitk"
 
 # kubernetes
 alias k="kubectl"
