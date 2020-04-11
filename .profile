@@ -35,10 +35,12 @@ test -r ~/.dir_colors && eval $(dircolors ~/.dir_colors)
 
 # git
 alias ga="git add ."
+alias gb="git checkout -b"
 alias gc="git commit"
 alias gs="git status"
 alias pl="git pull"
 alias gitk="DISPLAY=:0 gitk"
+alias master="git checkout master"
 
 # kubernetes
 alias k="kubectl"
