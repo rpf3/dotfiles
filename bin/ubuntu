@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+set -e
+
+apt_base() {
+  sudo apt update
+
+  sudo apt install -y \
+    jq \
+    shellcheck
+}
+
+install_python() {
+  sudo apt install -y \
+    python3-pip \
+    python3-venv \
+    pipenv
+}
+
+install_pipx() {
+  if [[ -z $(command -v pipx) ]]; then
+    python3 -m pip install --user pipx
+  else
+    echo "Skipping pipx; found installation at $(command -v pipx)"
+  fi
+}
+
+cleanup() {
+  sudo apt autoremove -y
+}
+
+main() {
+  apt_base
+  install_python
+  install_pipx
+  cleanup
+}
+
+main
