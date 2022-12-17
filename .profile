@@ -44,7 +44,7 @@ alias main="git checkout main"
 
 # kubernetes
 alias k="kubectl"
-alias kc="kubectl config set-context --current --namespace"
+alias kn="kubectl config set-context --current --namespace"
 
 # docker
 wsl.exe -u root -e sh -c "(service docker status || service docker start) && clear"
