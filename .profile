@@ -40,7 +40,7 @@ alias gc="git commit"
 alias gs="git status"
 alias pl="git pull"
 alias gitk="DISPLAY=:0 gitk"
-alias master="git checkout master"
+alias main="git checkout main"
 
 # kubernetes
 alias k="kubectl"
